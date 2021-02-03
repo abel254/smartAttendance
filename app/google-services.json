@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "905659483278",
+    "firebase_url": "https://smartattendance-51a2b.firebaseio.com",
+    "project_id": "smartattendance-51a2b",
+    "storage_bucket": "smartattendance-51a2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905659483278:android:d2ff361470ac56baf575df",
+        "android_client_info": {
+          "package_name": "com.example.smartattendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905659483278-8dfout8gmp41bntj24fh9dcbdt2nm0ou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartattendance",
+            "certificate_hash": "127f95b3edf2bc3b3e147b7ce9a030934ede73fd"
+          }
+        },
+        {
+          "client_id": "905659483278-rquc14dksdb2hs1eqevlkud4fqb7p8kp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartattendance",
+            "certificate_hash": "63ec4af49e2b960369fd2796baaa63e6857ae7f9"
+          }
+        },
+        {
+          "client_id": "905659483278-hmbvgk4j4j8gp8ctasel7uucjnvtfrlu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkW3Njp-99vxDal-WCNbHv0b_kQBuBa0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905659483278-hmbvgk4j4j8gp8ctasel7uucjnvtfrlu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

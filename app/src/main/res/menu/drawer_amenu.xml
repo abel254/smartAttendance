@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home"/>
+        <item android:id="@+id/nav_scan"
+            android:icon="@drawable/scan"
+            android:title="Scan"/>
+        <item android:id="@+id/nav_current"
+            android:icon="@drawable/current"
+            android:title="Current"/>
+        <item android:id="@+id/nav_reports"
+            android:icon="@drawable/reports"
+            android:title="Reports"/>
+        <item android:id="@+id/nav_allstudents"
+            android:icon="@drawable/all_students"
+            android:title="Registered Students"/>
+        <item android:id="@+id/nav_qrcodes"
+            android:icon="@drawable/qrcode"
+            android:title="Student QR Codes"/>
+
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item android:id="@+id/nav_password"
+                android:icon="@drawable/admin_password"
+                android:title="Change Password"/>
+            <item android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout"/>
+        </menu>
+    </item>
+</menu>
