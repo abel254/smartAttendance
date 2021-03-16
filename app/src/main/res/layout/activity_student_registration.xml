@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,10 +24,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_margin="20dp"
-            android:src="@drawable/splash_qr" />
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon" />
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -41,8 +43,9 @@
             android:layout_margin="20dp"
             android:fontFamily="sans-serif-light"
             android:text="Student Registration"
+            android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
-            android:textSize="28sp" />
+            android:textSize="25sp" />
 
         <LinearLayout
             android:id="@+id/linearl"
@@ -75,7 +78,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/person" />
+                    app:srcCompat="@drawable/person" />
 
             </RelativeLayout>
 
@@ -105,7 +108,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/person" />
+                    app:srcCompat="@drawable/reg" />
 
             </RelativeLayout>
 
@@ -123,6 +126,7 @@
                     android:background="@drawable/et_bg"
                     android:fontFamily="sans-serif-light"
                     android:hint="Email"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textColor="@color/white"
@@ -135,7 +139,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/email" />
+                    app:srcCompat="@drawable/email" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -165,7 +169,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/password" />
+                    app:srcCompat="@drawable/password" />
             </RelativeLayout>
 
 
@@ -183,6 +187,7 @@
             android:paddingLeft="70dp"
             android:paddingRight="70dp"
             android:text="Sign Up"
+            android:clickable="true"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp" />

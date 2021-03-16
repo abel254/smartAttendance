@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginStart="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginRight="5dp"
+    android:orientation="vertical"
+    android:padding="2dp">
+
+    <TextView
+        android:id="@+id/date_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:text="21-Feb-2021" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/results_cardview"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="5dp">
 
         <RelativeLayout
@@ -34,10 +49,32 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:text="10:09 AM"
+                android:text="10:09"
                 android:textSize="10sp" />
-        </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:text="12/05/2020"
+                android:textSize="10sp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/dateDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:text="12"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 

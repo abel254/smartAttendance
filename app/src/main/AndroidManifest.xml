@@ -3,9 +3,13 @@
     package="com.example.smartattendance">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -15,14 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudentMain"></activity>
+        <activity android:name=".StudentMain" />
         <activity android:name=".ViewQRCode" />
         <activity
             android:name=".AdminMain"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student.StudentMain"
-            android:theme="@style/AppTheme.TransparentActionBar" />
+            android:theme="@style/MyTheme.ActionBar" />
         <activity android:name=".Authentication.StudentRegistration" />
         <activity android:name=".Authentication.StudentLogin" />
         <activity android:name=".Authentication.AdminLogin" />
@@ -34,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
     </application>
 
 </manifest>

@@ -4,30 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
-        app:flashButtonVisible="true"
-        app:frameAspectRatioHeight="1"
-        app:frameAspectRatioWidth="1"
-        app:frameColor="@android:color/white"
-        app:frameCornersRadius="0dp"
-        app:frameCornersSize="50dp"
-        app:frameSize="0.75"
-        app:frameThickness="2dp"
-        app:maskColor="#77000000" />
+        android:background="#77000000" />
+
+    <SurfaceView
+        android:id="@+id/camera"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:id="@+id/results_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scanner_view"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/view"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:text="text" />
+        android:gravity="center"
+        android:text="scan text"
+        android:textSize="18sp" />
 </RelativeLayout>

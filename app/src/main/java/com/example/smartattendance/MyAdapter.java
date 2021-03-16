@@ -21,6 +21,8 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Scan, MyAdapter.MyViewHol
     @Override
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Scan model) {
         holder.scanResults.setText(model.getScanResults());
+        holder.time.setText(model.getTime());
+        holder.date.setText(model.getDate());
     }
 
     @NonNull
@@ -32,12 +34,14 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Scan, MyAdapter.MyViewHol
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView scanResults;
+        TextView scanResults, time, date;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             scanResults = itemView.findViewById(R.id.scannresults_text);
+            time = itemView.findViewById(R.id.time);
+            date = itemView.findViewById(R.id.date);
         }
     }
 

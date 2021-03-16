@@ -1,14 +1,15 @@
 package com.example.smartattendance.Authentication;
 
 public class Student {
-    public String fullname, email;
+    public String fullname, email, regNumber;
 
     public Student() {
     }
 
-    public Student(String fullname, String email) {
+    public Student(String fullname, String email, String regNumber) {
         this.fullname = fullname;
         this.email = email;
+        this.regNumber = regNumber;
     }
 
     public String getFullname() {
@@ -28,4 +29,11 @@ public class Student {
         this.email = email;
     }
 
+    public String getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
 }

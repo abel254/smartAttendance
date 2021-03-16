@@ -12,66 +12,105 @@
         android:scaleType="centerCrop"
         android:src="@drawable/student_page" />
 
-    <TextView
-        android:id="@+id/student_fullname"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:fontFamily="sans-serif-light"
-        android:text="name"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="30sp" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/congrats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif"
             android:text="Congratulations!"
             android:textColor="@android:color/white"
-            android:textSize="35sp" />
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/student_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:text="name"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/student_reg_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Reg"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/congrats"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:fontFamily="sans-serif"
-            android:text="Learning made easier"
+            android:text="Learning made easier through"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/message"
+            android:layout_below="@+id/congrats"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif"
+            android:text="technology"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
-            android:text="A copy of your personal QR Code will be sent"
+            android:text="A copy of your personal QR Code will be issued to you"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/information"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
             android:fontFamily="sans-serif"
-            android:text="via your email address"
+            android:text="by your Chairman of Department (C.O.D) or"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif"
+            android:text="sent via your email address"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
 
-    </RelativeLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/student_toolbar"
+            android:background="@color/transparent"/>
+    </LinearLayout>
 </RelativeLayout>

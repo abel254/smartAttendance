@@ -16,10 +16,18 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/splash_qr" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_login"
@@ -29,8 +37,9 @@
             android:layout_margin="20dp"
             android:fontFamily="sans-serif-light"
             android:text="Admin Login"
+            android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <LinearLayout
             android:id="@+id/linearl"
@@ -45,6 +54,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/admin_username"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
@@ -53,6 +63,7 @@
                     android:hint="Username"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
+                    android:inputType="textEmailAddress"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="15sp" />
@@ -63,7 +74,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/person" />
+                    app:srcCompat="@drawable/person" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -73,6 +84,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/admin_password"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
@@ -92,7 +104,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/password" />
+                    app:srcCompat="@drawable/password" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -108,6 +120,7 @@
             android:paddingLeft="70dp"
             android:paddingRight="70dp"
             android:text="Login"
+            android:clickable="true"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp" />

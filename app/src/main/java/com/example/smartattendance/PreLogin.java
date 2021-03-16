@@ -10,9 +10,15 @@ import android.widget.Button;
 
 import com.example.smartattendance.Authentication.AdminLogin;
 import com.example.smartattendance.Authentication.StudentLogin;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PreLogin extends AppCompatActivity {
     Button admin, student;
+    AdimModel adminLogin;
+    private DatabaseReference reference;
+    String username = "admin";
+    String password = "admin123";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,9 @@ public class PreLogin extends AppCompatActivity {
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                reference = FirebaseDatabase.getInstance().getReference("AdminCredentials");
+                adminLogin = new AdimModel(username, password);
+                reference.child(username).setValue(adminLogin);
                 startActivity(new Intent(PreLogin.this, AdminLogin.class));
 
             }

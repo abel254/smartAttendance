@@ -89,7 +89,7 @@
                     android:id="@+id/reports_image"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:src="@drawable/reports"/>
+                    android:src="@drawable/a_graph"/>
 
                 <TextView
                     android:layout_width="wrap_content"

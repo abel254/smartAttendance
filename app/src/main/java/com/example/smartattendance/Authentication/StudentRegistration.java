@@ -1,11 +1,14 @@
 package com.example.smartattendance.Authentication;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -21,11 +24,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.smartattendance.BitmapDatabase;
 import com.example.smartattendance.R;
 import com.example.smartattendance.Upload;
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,9 +52,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class StudentRegistration extends AppCompatActivity implements View.OnClickListener {
     StudentDetails member;
+    Upload upload;
     String combined_details;
     String fullname, regNumber, studentEmail, studentPassword;
     private EditText fullnameEdt, studentEmailEdt, studentPasswordEdt, regNumberEdt;
@@ -56,13 +66,15 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
     private ProgressBar progressBar;
     private TextView registerLoginTv;
     private long maxid = 0;
-    private DatabaseReference reff, mDatabaseRef;
+    private DatabaseReference reff;
     private StorageReference mStorageRef;
     ImageView imageView;
     private Bitmap bitmap;
+    String regNumberPattern = "[A-Z0-9_.+-]+/[0-9]+";
+    private static final int REQUEST_PERMISSION = 0;
+
 
     private FirebaseAuth mAuth;
-    private BitmapDatabase mySqlBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +98,10 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
         progressBar = findViewById(R.id.progressBar);
         imageView = findViewById(R.id.bitmap_image);
 
-       mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
-
-        mySqlBitmap = new BitmapDatabase(this, "BitmapDB.sqlite", null, 1);
-        mySqlBitmap.queryData("CREATE TABLE IF NOT EXISTS BITMAP (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, reg VARCHAR, email VARCHAR, image BLOG)");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
 
         member = new StudentDetails();
+        upload = new Upload();
 
         reff = FirebaseDatabase.getInstance().getReference().child("Member");
         reff.addValueEventListener(new ValueEventListener() {
@@ -108,8 +117,47 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            int hasWritePermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            int hasReadPermission = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+
+            List<String> permissions = new ArrayList<>();
+            if (hasWritePermission != PackageManager.PERMISSION_GRANTED){
+                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }else {
+
+            }
+            if (hasReadPermission != PackageManager.PERMISSION_GRANTED){
+                permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }else {
+
+            }
+            if (!permissions.isEmpty()){
+                requestPermissions(permissions.toArray(new String[permissions.size()]), REQUEST_PERMISSION);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSION);
+            }
+        }
+
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case REQUEST_PERMISSION:{
+                for (int i = 0; i < permissions.length; i++){
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                        System.out.println("Permissions -->" + "Permission Granted; " + permissions[i]);
+                    }else if (grantResults[i] == PackageManager.PERMISSION_DENIED){
+                        System.out.println("Permission --> " + "Permission Denied: " + permissions[i]);
+                    }
+                }
+            }
+            break;
+            default: {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -125,7 +173,6 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
                 registerUser();
                 break;
         }
-
     }
 
     private void registerUser() {
@@ -142,11 +189,18 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
             return;
         }
 
-        if (regNumber.isEmpty()) {
-            regNumberEdt.setError("registration number is required");
+        if (regNumber.isEmpty()){
+            regNumberEdt.setError("Registration number is required");
             regNumberEdt.requestFocus();
             return;
         }
+        if (!regNumber.matches(regNumberPattern)) {
+            regNumberEdt.setError("Please provide valid registration number");
+            Toast.makeText(getApplicationContext(), "e.g. C025-01-0974/2017", Toast.LENGTH_LONG).show();
+            regNumberEdt.requestFocus();
+            return;
+        }
+
 
         if (studentEmail.isEmpty()) {
             studentEmailEdt.setError("Email is required");
@@ -174,12 +228,6 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
 
         progressBar.setVisibility(View.VISIBLE);
 
-//saving pure details to firebase
-        member.setFullname(fullname);
-        member.setRegnumber(regNumber);
-        member.setEmail(studentEmail);
-        member.setPassword(studentPassword);
-        reff.child(String.valueOf(maxid + 1)).setValue(member);
 
 
 //generate QR Code
@@ -197,14 +245,7 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
             }
 
             imageView.setImageBitmap(bitmap);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        //Saving data to SQLiteDatabase
-        try {
-            mySqlBitmap.insertData(fullname, regNumber, imageViewToByte(imageView), studentEmail);
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -214,7 +255,7 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onComplete(@NonNull final Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Student user = new Student(fullname, studentEmail);
+                            Student user = new Student(fullname, studentEmail, regNumber);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -227,6 +268,7 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
 
                                         startActivity(new Intent(StudentRegistration.this, StudentLogin.class));
                                         uploadImage();
+                                        savePureDetails();
                                         finish();
 
                                     } else {
@@ -243,6 +285,7 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
                 });
     }
 
+
     private void uploadImage() {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100,bytes);
@@ -253,19 +296,32 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
         fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Upload upload = new Upload(fullname, regNumber, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                String uploadId = mDatabaseRef.push().getKey();
-                mDatabaseRef.child(uploadId).setValue(upload);
+                fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        DatabaseReference imagestore = FirebaseDatabase.getInstance().getReference("Image");
+
+                        String uploadId = imagestore.push().getKey();
+
+                        upload.setFullname(fullname);
+                        upload.setmImageUrl(String.valueOf(uri));
+                        upload.setRegnumber(regNumber);
+                        upload.setEmail(studentEmail);
+                        imagestore.child(uploadId).setValue(upload);
+                    }
+                });
             }
         });
     }
 
+    public void savePureDetails(){
+        member.setIdNuM(String.valueOf(maxid + 1));
+        member.setFullname(fullname);
+        member.setRegnumber(regNumber);
+        member.setEmail(studentEmail);
+        member.setPassword(studentPassword);
+        reff.child(String.valueOf(maxid + 1)).setValue(member);
 
-    private byte[] imageViewToByte(ImageView image){
-        Bitmap myBitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
     }
+
 }

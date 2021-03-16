@@ -32,7 +32,7 @@ public class HomeAdminFragment extends Fragment {
             public void onClick(View v) {
                getFragmentManager()
                        .beginTransaction()
-                       .replace(R.id.fragment_container, new ScanFragment()).commit();
+                       .replace(R.id.fragment_container, new ScanFragment()).addToBackStack(null).commit();
             }
         });
         currentCardview.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +40,7 @@ public class HomeAdminFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new CurrentFragment()).commit();
+                        .replace(R.id.fragment_container, new CurrentFragment()).addToBackStack(null).commit();
             }
         });
         reportsCardview.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +48,7 @@ public class HomeAdminFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new ReportsFragment()).commit();
+                        .replace(R.id.fragment_container, new ReportsFragment()).addToBackStack(null).commit();
             }
         });
         viewqrCardview.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class HomeAdminFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new StudentQrCodesFragment()).commit();
+                        .replace(R.id.fragment_container, new StudentQrCodesFragment()).addToBackStack(null).commit();
             }
         });
         return view;

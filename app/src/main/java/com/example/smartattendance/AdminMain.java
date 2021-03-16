@@ -2,6 +2,7 @@ package com.example.smartattendance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -10,11 +11,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.smartattendance.Authentication.AdminLogin;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,13 +60,14 @@ public class AdminMain extends AppCompatActivity implements NavigationView.OnNav
                 break;
             case R.id.nav_scan:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanFragment()).commit();
+                        new ScanFragment()).addToBackStack("tag").commit();
                 break;
             case R.id.nav_current:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CurrentFragment()).commit();
                 break;
             case R.id.nav_reports:
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ReportsFragment()).commit();
                 break;
@@ -74,18 +79,24 @@ public class AdminMain extends AppCompatActivity implements NavigationView.OnNav
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new StudentQrCodesFragment()).commit();
                 break;
+            case R.id.nav_logout:
+                startActivity(new Intent(getApplicationContext(), PreLogin.class));
+                finish();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
-
+/*
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
         super.onBackPressed();
+
     }
+
+ */
 
     public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(AdminMain.this, permission)
@@ -107,4 +118,6 @@ public class AdminMain extends AppCompatActivity implements NavigationView.OnNav
             }
         }
     }
+
+
 }

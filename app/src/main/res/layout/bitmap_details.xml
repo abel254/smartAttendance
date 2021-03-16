@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bitmap_cardview"
-        android:layout_width="170dp"
+        android:layout_width="172dp"
         android:layout_height="250dp"
         android:layout_margin="5dp">
 
@@ -42,6 +42,12 @@
                 android:fontFamily="sans-serif-light"
                 android:text="C025-01-0974"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="emailofstudent"
+                android:visibility="invisible"
+                android:id="@+id/email_of_student"/>
 
         </RelativeLayout>
 

@@ -66,8 +66,7 @@ public class RecyclerViewQrAdapter extends RecyclerView.Adapter<RecyclerViewQrAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView fullname;
-        TextView regnumber;
+        TextView fullname, regnumber, email;
         ImageView imageView;
         CardView bitmapCardview;
 
@@ -78,6 +77,7 @@ public class RecyclerViewQrAdapter extends RecyclerView.Adapter<RecyclerViewQrAd
             fullname = itemView.findViewById(R.id.bitmap_fullname);
             regnumber = itemView.findViewById(R.id.bitmap_regnumber);
             imageView = itemView.findViewById(R.id.qr_image);
+            email = itemView.findViewById(R.id.email_of_student);
             bitmapCardview = itemView.findViewById(R.id.bitmap_cardview);
         }
     }
